@@ -1,21 +1,17 @@
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import * as style from './Map.module.css';
+import React from 'react';
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import InternalMap from './InternalMap';
 
 const Map = (props) => {
-  const [name, setName] = useState(props.name);
+  const client = new ApolloClient({
+    uri: './graphql',
+    cache: new InMemoryCache()
+  });
 
   return (
-    <div>
-      <h3>Hello, {name}!</h3>
-      <hr />
-      <form>
-        <label className={style.bright} htmlFor="name">
-          Say hello to:
-          <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        </label>
-      </form>
-    </div>
+    <ApolloProvider client={client}>
+      <InternalMap />
+    </ApolloProvider>
   );
 };
 
