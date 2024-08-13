@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  year: MyString
+  relative: false
+  number: 1
+
+two:
+  year: MyString
+  relative: false
+  number: 1
