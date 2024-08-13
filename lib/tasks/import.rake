@@ -6,8 +6,6 @@ task :import_adoptions, [:filename] => :environment do
         Adoption.create!(
             :year => row["Fiscal Year"],
             :county => row["County"],
-            :agency => row["Agency Type"],
-            :relative => row["Relative Adoption"],
             :number => row["Number of Consummated Adoptions"]
         )
     end
