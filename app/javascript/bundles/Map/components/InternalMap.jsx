@@ -33,7 +33,7 @@ const InternalMap = (props) => {
           </form>
           <div id="map"></div>
           <div>{adoptions.map((county, index) => {
-                return <div key={"county_"+ index}>{county.number} adoptions in {county.county}</div>
+                return <div key={"county_"+ index}>{county.count} adoptions in {county.county}</div>
           })}</div>
         </div>
     );
@@ -42,8 +42,10 @@ const InternalMap = (props) => {
   export const GET_ADOPTIONS = gql`
     query getAdoptions($year: String!) {
       adoption(year: $year) {
-        number
+        count
         county
+        color
+        mapId
       }
     }
   `;
