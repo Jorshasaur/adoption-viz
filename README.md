@@ -1,14 +1,21 @@
-# README
+# Texas Adoption Visualization
 
-First run steps:
+This project is a demo project that renders data from the [Texas Open Data Portal](https://data.texas.gov/dataset/CPS-4-5-Adoptions-Consummated-by-County-FY2014-202/fg8z-fzm6/about_data) around successful adoptions from the period of 2014 - 2023.
 
-- `docker-compose build`
-- `docker-compose run app rails db:create db:migrate` 
-- `docker-compose run app rake import_adoptions` 
-- `docker-compose run app rails tailwindcss:install` _Maybe skip this step_
-- `docker-compose up`
+## Technology
 
-Common Commands:
-- `docker-compose run app rails console`
-- `docker-compose run app rails db:seed`
-- `docker-compose run app rails db:drop db:create db:migrate db:seed` _Needs a shut down instance_
+The project is built with this technology:
+- Ruby on Rails: the baseline server
+- Postgres: houses the actual adoption data ported over from Texas
+- React: renders the front end
+- GraphQL: used to communicate with Rails and also filter the data by year
+- Front End Map: the state map of Texas comes from simplemaps.com, I'm passing in the data to rerender it (I did not build the map)
+
+## Deployment
+The server and code currently deploy to Heroku on merges to the `main` branch.  The Postgres database is hosted in a cluster on DigitalOcean.  The data from Texas has been copied down into a file called `adoptions_input.csv` in `/db/data` and is transformed a bunch to get be more usable with the map component.
+
+## Running Locally
+TODO
+
+## Running Tests
+TODO
