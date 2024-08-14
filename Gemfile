@@ -64,7 +64,6 @@ gem "pg"
 gem "graphql", "~> 2.3"
 gem "graphiql-rails", group: :development
 gem "net-pop", github: "ruby/net-pop" # specifically for Heroku
-
 gem "shakapacker", "= 8.0"
-
 gem "react_on_rails", "= 14.0.4"
+gem "color_math", "= 0.1.0"

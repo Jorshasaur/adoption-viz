@@ -3,7 +3,7 @@ class CreateAdoptions < ActiveRecord::Migration[7.2]
     create_table :adoptions do |t|
       t.string :year
       t.boolean :relative
-      t.integer :number
+      t.integer :count
       t.string :county
       t.string :agency
       t.timestamps
