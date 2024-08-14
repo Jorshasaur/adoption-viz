@@ -24,7 +24,8 @@ end
 
 desc "Imports the Adoption data CSV"
 task :import_adoptions, [:filename] => :environment do
-    CSV.foreach('adoptions.csv', :headers => true) do |row|
+    file_path = "#{data_folder}/adoptions.csv"
+    CSV.foreach(file_path, :headers => true) do |row|
         Adoption.create!(
             :year => row["Fiscal Year"],
             :county => row["County"],
@@ -133,10 +134,15 @@ task :colorize_adoptions, [:filename] => :environment do
     min_adoptions = summed_data.map { |_, _, adoptions| adoptions }.min
     max_adoptions = summed_data.map { |_, _, adoptions| adoptions }.max
 
-    # Function to normalize a value between 0 and 1
-    def normalize(value, min, max)
-        (value - min).to_f / (max - min).to_f
-    end
+  # Function to normalize a value with enhanced contrast
+  def normalize(value, min, max)
+    # Apply a logarithmic scale for more contrast on low numbers
+    log_min = Math.log(min + 1)
+    log_max = Math.log(max + 1)
+    log_value = Math.log(value + 1)
+
+    (log_value - log_min) / (log_max - log_min)
+  end
 
     # Function to get color shade based on adoption count
     def get_color(adoptions, min_adoptions, max_adoptions, map_id)

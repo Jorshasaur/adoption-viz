@@ -75,7 +75,6 @@ var simplemaps_statemap_mapdata={
   },
   state_specific: {
     "48001": {
-      color: "#e1f6fa",
       name: "Anderson"
     },
     "48003": {
@@ -91,7 +90,6 @@ var simplemaps_statemap_mapdata={
       description: " "
     },
     "48009": {
-      color: "#33c0dc",
       name: "Archer",
       description: " "
     },
@@ -1092,22 +1090,11 @@ var simplemaps_statemap_mapdata={
       description: " "
     }
   },
-  locations: {
-    "0": {
-      name: "Example",
-      lat: 30.99131833333333,
-      lng: -99.85801300000001
-    }
-  },
+  locations: { },
   labels: {},
   legend: {
     entries: []
   },
   regions: {},
-  data: {
-    data: {
-      "48001": "12",
-      "48009": "25"
-    }
-  }
+  data: { }
 };
