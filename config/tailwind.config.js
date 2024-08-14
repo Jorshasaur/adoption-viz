@@ -19,7 +19,7 @@ module.exports = {
       gray: colors.gray,
       slate: colors.slate,
       stone: colors.stone,
-      blue: colors.cyan,
+      blue: colors.sky,
       green: colors.emerald
     }
   },

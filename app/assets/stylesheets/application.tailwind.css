@@ -11,3 +11,16 @@
 }
 
 */
+
+.app-container {
+  width: 100%;
+  position: relative;
+}
+
+.text-huge {
+  font-size: 16rem;
+  position: absolute;
+  right: 180px;
+  top: -90px;
+  z-index: -5;
+}
