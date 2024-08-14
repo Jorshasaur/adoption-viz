@@ -7,7 +7,7 @@ const MapControls = () => {
 
   return (
     <Fragment>
-        <div className="columns-2 pl-12 pr-8 pt-32 pb-4">
+        <div className="columns-2 pl-12 pr-8 pt-32 pb-4 test">
             <h1 className="text-3xl text-gray-800 font-sans font-bold">Successful Adoptions by County</h1>
             <YearSelector selectedYear={selectedYear} selectedYearChanger={(year) => setSelectedYear(year)} />
         </div>

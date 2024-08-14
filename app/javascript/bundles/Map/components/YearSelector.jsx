@@ -7,7 +7,7 @@ const YearSelector = ({ selectedYear = 2014, selectedYearChanger }) => {
         <ul className="text-2xl flex flex-wrap items-center justify-center font-normal">
             {years.map((year) => (
                 <li key={year} className="list-none">
-                    <a className={`text-gray-${year === selectedYear ? '800' : '400'} no-underline px-2`} href ="#" onClick={(e) => {
+                    <a className={`${year === selectedYear ? 'text-gray-800' : 'text-gray-400'} no-underline px-2`} href ="#" onClick={(e) => {
                         e.preventDefault();
                         selectedYearChanger(year);
                     }}>
