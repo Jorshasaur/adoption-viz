@@ -3,7 +3,4 @@
 class MapController < ApplicationController
   layout "map"
 
-  def index
-    @map_props = { name: "Stranger" }
-  end
 end

@@ -134,32 +134,41 @@ task :colorize_adoptions, [:filename] => :environment do
     min_adoptions = summed_data.map { |_, _, adoptions| adoptions }.min
     max_adoptions = summed_data.map { |_, _, adoptions| adoptions }.max
 
-  # Function to normalize a value with enhanced contrast
-  def normalize(value, min, max)
-    # Apply a logarithmic scale for more contrast on low numbers
-    log_min = Math.log(min + 1)
-    log_max = Math.log(max + 1)
-    log_value = Math.log(value + 1)
+    # Define the gradient colors: light yellow, orange, deep red
+    base_color = ColorMath.new(255, 255, 204) # Light yellow RGB (#ffffcc)
+    mid_color = ColorMath.new(255, 165, 0)    # Orange RGB (#ffa500)
+    max_color = ColorMath.new(255, 0, 0)      # Deep red RGB (#ff0000)
 
-    (log_value - log_min) / (log_max - log_min)
-  end
+    # Function to normalize a value between 0 and 1
+    def normalize(value, min, max)
+        # Apply a logarithmic scale for more contrast on low numbers
+        log_min = Math.log(min + 1)
+        log_max = Math.log(max + 1)
+        log_value = Math.log(value + 1)
 
-    # Function to get color shade based on adoption count
-    def get_color(adoptions, min_adoptions, max_adoptions, map_id)
+        (log_value - log_min) / (log_max - log_min)
+    end
+
+    # Function to get color shade based on adoption count using multi-hue gradient
+    def get_color(adoptions, min_adoptions, max_adoptions, base_color, mid_color, max_color)
         normalized_value = normalize(adoptions, min_adoptions, max_adoptions)
-  
-        # Adjust the starting color to a light blue (#e0f7fa) instead of white
-        base_color = ColorMath.new(224, 247, 250) # Light blue RGB (e0f7fa)
-        max_color = ColorMath.new(0, 0, 255)      # Dark blue RGB (0000ff)
-      
-        # Interpolate between base_color and max_color based on normalized_value
-        interpolated_color = base_color.mix_with(max_color, normalized_value)
-        interpolated_color.to_hex
+
+        if normalized_value < 0.5
+        # Interpolate between base_color and mid_color
+        blend_factor = normalized_value * 2 # Scale to [0, 1] for first half
+        color = base_color.mix_with(mid_color, blend_factor)
+        else
+        # Interpolate between mid_color and max_color
+        blend_factor = (normalized_value - 0.5) * 2 # Scale to [0, 1] for second half
+        color = mid_color.mix_with(max_color, blend_factor)
+        end
+
+        color.to_hex
     end
 
     # Add color mapping based on the number of adoptions
     colored_data = summed_data.map do |year, county, adoptions, map_id|
-        color = get_color(adoptions, min_adoptions, max_adoptions, map_id)
+        color = get_color(adoptions, min_adoptions, max_adoptions, base_color, mid_color, max_color)
         [year, county, adoptions, color, map_id]
     end
 
