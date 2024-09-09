@@ -2,6 +2,8 @@
 
 This project is a demo project that renders data from the [Texas Open Data Portal](https://data.texas.gov/dataset/CPS-4-5-Adoptions-Consummated-by-County-FY2014-202/fg8z-fzm6/about_data) around successful adoptions from the period of 2014 - 2023.
 
+It is currently (as of 9/2024) hosted at [https://adoption-ca24dfbd0aee.herokuapp.com/](https://adoption-ca24dfbd0aee.herokuapp.com/).
+
 ## Technology
 
 The project is built with this technology:
