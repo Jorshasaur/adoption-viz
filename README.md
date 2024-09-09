@@ -56,7 +56,7 @@ The project's React front end has three components:
 - `app/javascript/bundles/Map/components/MapManager.jsx`: this component does the calls to GraphQL, cleans the response for the map, and updates the map component with the new data.
 
 ### Back End
-The back end uses GraphQL to deliver data to the React frontend.  I disabled CSRF just for this example so I could get the example completed faster.  This should most definitely be re-enabled if it ever became a real thing for security.  Ideally I'd read the header in the page load and pass it back to calls going to GraphQL.
+The back end uses GraphQL to deliver data to the React frontend.
 
 - `app/controllers/map_controller.rb` - the only real controller in Rails that only serves the map index page
 - `app/views/map/index.html.erb` - the map index page that holds most of the HTML and loads `MapControls` (see Front End).  The project uses React on Rails so I'm using the helper to write the component to the page.
@@ -66,10 +66,9 @@ The back end uses GraphQL to deliver data to the React frontend.  I disabled CSR
 The data from Texas is really great but I needed to change it to work in a map, add color data, and fill in the places where counties had zero adoptions since the Texas CVS just left those out.  If you look at `lib/tasks/import.rake` you can see all the steps to clean, colorize, and format the data.
 
 ## What Would I Change?
-1. If this were a real thing I'd enable CSRF and pass the header to GraphQL to utilize that cross site forgery protection.
-2. The data in Postgres could be normalized, I'm repeating data in places when that isn't the most efficient.  The data could be broken out by number of adoptions with keys for counties and year.  If this were a real project and the data didn't update frequently, that could be an over optimization.
-3. The third party map I used is really cool but quirky in the way that it runs.  I'm just including the JS from that component in the public folder and loading it directly in the `map.html.erb` layout.  That's not great, ideally it would be bundled with the rest of the Javascript but I kept running into issues when I served it from the `vendor` folder.  Since it didn't seem important, I just skipped over that for now.
-4. Map Colors!  I played a lot with how to colorize the map so it looked exciting.  The thing is that while the number of adoptions change per county, the counties that have lots of adoptions tend to have lots every year.  So if you jump back and forth between the years its not that visually exciting.  If this were real I'd probably add something like animations to emphasis the changes.  And the map needs a loading screen because there is a delay between the data being loaded from GraphQL and rendering.  It's a brief flash now, which I think is fine for a demo.
+1. The data in Postgres could be normalized, I'm repeating data in places when that isn't the most efficient.  The data could be broken out by number of adoptions with keys for counties and year.  If this were a real project and the data didn't update frequently, that could be an over optimization.
+2. The third party map I used is really cool but quirky in the way that it runs.  I'm just including the JS from that component in the public folder and loading it directly in the `map.html.erb` layout.  That's not great, ideally it would be bundled with the rest of the Javascript but I kept running into issues when I served it from the `vendor` folder.  Since it didn't seem important, I just skipped over that for now.
+3. Map Colors!  I played a lot with how to colorize the map so it looked exciting.  The thing is that while the number of adoptions change per county, the counties that have lots of adoptions tend to have lots every year.  So if you jump back and forth between the years its not that visually exciting.  If this were real I'd probably add something like animations to emphasis the changes.  And the map needs a loading screen because there is a delay between the data being loaded from GraphQL and rendering.  It's a brief flash now, which I think is fine for a demo.
 
 ## Running Tests
 TODO
