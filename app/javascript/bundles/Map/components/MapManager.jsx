@@ -7,9 +7,17 @@ const MapManager = ({ selectedYear = 2016 }) => {
     }, [selectedYear]);
 
     function callAPI() {
+      const tokenEl = document.getElementsByName('csrf-token')[0]
+      let token = ""
+      if (tokenEl) {
+        token = tokenEl.getAttribute('content')
+      }
       const client = new ApolloClient({
         uri: './graphql',
-        cache: new InMemoryCache()
+        cache: new InMemoryCache(),
+        headers: {
+          'X-CSRF-Token': token
+        }
       });
       client
         .query({
